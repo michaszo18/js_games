@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisielec</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="hangman">
+        <div id="output"></div>
+        <div id="word"></div>
+        <div id="category"></div>
+        <div id="letters"></div>
+    </section>
+
+    <script src="./app/Game.js"></script>
+
+    <script>
+        const game = new Game({
+            outputWr: document.getElementById('output'),
+            wordWr: document.getElementById('word'),
+            categoryWr: document.getElementById('category'),
+            lettersWr: document.getElementById('letters')
+        })
+        game.start()
+    </script>
+
+</body>
+</html>
