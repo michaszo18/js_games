@@ -22,6 +22,7 @@ export class Quote {
       this.guessed.add(letter);
       return true;
     } 
+    
     return false;
   
   }

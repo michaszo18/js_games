@@ -1,6 +1,10 @@
 import { Quote } from './Quote.js';
 
 export class Game {
+
+  currentStep = 0;
+  lastStep = 8;
+
   quotes = [
     {
       text: "pan pampeusz",
@@ -39,12 +43,41 @@ export class Game {
 
   guess(letter, e) {
     e.target.disabled = true;
-    this.quote.guess(letter);
-    this.drawQuote();
+    if(this.quote.guess(letter)) {
+      this.drawQuote(); 
+    } else {
+      this.mistake(this.currentStep);
+      this.currentStep += 1;
+
+      if(this.currentStep === this.lastStep) {
+        this.loosing();
+      }
+    }
+
   }
 
   drawQuote() {
     const content = this.quote.getContent();
     this.wordWr.innerHTML = content;
+
+    if(content.includes('_') === false) {
+      this.winning();
+    }
   }
+
+  mistake(step) {
+    document.getElementsByClassName('step')[step]
+    .style.opacity = 1;
+  }
+
+  winning() {
+    this.wordWr.innerHTML = 'Wygrana!!!';
+    this.lettersWr.innerHTML = '';
+  } 
+
+  loosing() {
+    this.wordWr.innerHTML = 'Przegrana';
+    this.lettersWr.innerHTML = '';
+  }
+
 }
