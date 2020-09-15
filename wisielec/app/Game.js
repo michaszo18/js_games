@@ -24,22 +24,27 @@ export class Game {
 
   start() {
     this.drawLetters();
-    const content = this.quote.getContent();
-    this.wordWr.innerHTML = content;
+    this.drawQuote();
   }
 
   drawLetters() {
     const alphabet = "aąbcćdeęfghijklłmnńoóprsśtuwyzźż";
-
     for (const label of alphabet) {
       const button = document.createElement("button");
       button.innerHTML = label;
-      button.addEventListener("click", () => this.guess(label));
+      button.addEventListener("click", () => this.guess(label, event));
       this.lettersWr.appendChild(button);
     }
   }
 
-  guess(letter) {
-    console.log(letter);
+  guess(letter, e) {
+    e.target.disabled = true;
+    this.quote.guess(letter);
+    this.drawQuote();
+  }
+
+  drawQuote() {
+    const content = this.quote.getContent();
+    this.wordWr.innerHTML = content;
   }
 }
